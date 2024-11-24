@@ -27,12 +27,13 @@ const Sidebar = () => {
     { title: "Dashboard", icon: <LayoutDashboard className="h-5 w-5" />, path: "/dashboard" },
     { title: "Administrator", icon: <Users className="h-5 w-5" />, path: "/administrator" },
     { title: "Assign Role", icon: <UserCog className="h-5 w-5" />, path: "/admin-role" },
-    { title: "Admin Manager", icon: <Users className="h-5 w-5" />, path: "/admin-manager" },
+    { title: "Assign Manager", icon: <Users className="h-5 w-5" />, path: "/admin-manager" },
+    { title: "Party and Events", icon: <PartyPopper className="h-5 w-5" />, path: "/party-events" },
     { title: "Deal", icon: <Building2 className="h-5 w-5" />, path: "/deal" },
     { title: "Flash Deals", icon: <Zap className="h-5 w-5" />, path: "/flash-deals" },
     { title: "Enquiry", icon: <MessageCircle className="h-5 w-5" />, path: "/enquiry" },
     { title: "Menu Management", icon: <MenuIcon className="h-5 w-5" />, path: "/menu-management" },
-    { title: "Party and Events", icon: <PartyPopper className="h-5 w-5" />, path: "/party-events" },
+    
   ];
 
   const handleLogout = () => {
@@ -57,7 +58,10 @@ const Sidebar = () => {
         {/* Logo Area */}
         <div className="flex items-center justify-center p-4 ">
           {expanded ? (
-           <img src="" alt="" />
+           <img src="https://imgs.search.brave.com/G1uI9GrtnOZ3nwxfoKluaqzoD12CikdLe1aalSMBNwA/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTE3/OTc4MDg5NS92ZWN0/b3IvcGxhY2Vob2xk/ZXItZmxhdC1zeW1i/b2wtb3ItbG9jYXRp/b24tdmVjdG9yLWlj/b24uanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPXVrWFhMOUZ0/bE5IN3ZiS1UxYnQ4/NWtVYl9yR1VsaldV/dm16LXFyWnBBUkU9" 
+           alt="Logo"
+           className="h-8 w-8 object-contain" 
+           />
           ) : (
             <span></span>
           )}

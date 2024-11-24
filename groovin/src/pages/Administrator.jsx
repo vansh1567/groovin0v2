@@ -42,7 +42,7 @@ const Administrator = () => {
       {/* Header and Filters Section */}
       <div className="mb-8">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-semibold text-gray-900">Administrators</h1>
+          <h1 className="text-2xl font-semibold text-gray-900">Super Admin</h1>
           <button className="flex items-center gap-2 px-4 py-2 bg-white border rounded-lg shadow-sm hover:bg-gray-50">
             <Filter className="h-4 w-4" />
             <span>Filter</span>

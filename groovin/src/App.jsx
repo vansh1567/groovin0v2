@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import DashboardLayout from './pages/DashboardLayout';
 import Properties from './pages/Properties';
+import DashboardLayout from './pages/DashboardLayout';
 import Dashboard from './pages/Dashboard';
 import Administrator from './pages/Administrator';
 import AdminRole from './pages/AdminRole';
