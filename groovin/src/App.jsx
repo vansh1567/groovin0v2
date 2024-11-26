@@ -11,6 +11,7 @@ import Party from './pages/Party';
 import FlashDeals from './pages/FlashDeals';
 import Deals from './pages/Deals';
 import Enquiry from './pages/Enquiry';
+import Menu from './pages/Menu';
 
 const App = () => {
   return (
@@ -27,7 +28,7 @@ const App = () => {
           <Route path="deal" element={<Deals/>} />
           <Route path="flash-deals" element={<FlashDeals/>} />
           <Route path="enquiry" element={<Enquiry/>} />
-          <Route path="menu-management" element={<div>Menu Management Content</div>} />
+          <Route path="menu-management" element={<Menu/>} />
         </Route>
       </Routes>
     </Router>

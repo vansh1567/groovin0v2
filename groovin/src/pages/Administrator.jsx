@@ -13,27 +13,35 @@ const Administrator = () => {
   const adminData = [
     {
       id: 1,
-      name: "John Doe",
-      email: "john@example.com",
-      city: "New York",
-      createdDate: "2024-01-15",
-      status: "Active"
+      name: "From Factory by Sutra",
+      email: "factorybysutra@gmail.com",
+      city: "Gurugram",
+      createdDate: "31/7/2024",
+      status: "Approved"
     },
     {
       id: 2,
-      name: "Jane Smith",
-      email: "jane@example.com",
-      city: "Los Angeles",
-      createdDate: "2024-02-01",
-      status: "Inactive"
+      name: "The Red Lion",
+      email: "deeps@yopmail.com",
+      city: "Gurugram",
+      createdDate: "19/11/2024",
+      status: "Pending"
     },
     {
       id: 3,
-      name: "Mike Johnson",
-      email: "mike@example.com",
-      city: "Chicago",
-      createdDate: "2024-02-15",
-      status: "Active"
+      name: "The Millenium Centre",
+      email: "dummy123@gmail.com",
+      city: "Gurugram",
+      createdDate: "11/11/2024",
+      status: "Approved"
+    },
+    {
+      id: 4,
+      name: "Downtown Sector 29",
+      email: "downtown29@yopmail.com",
+      city: "Gurugram",
+      createdDate: "13/4/2024",
+      status: "Approved"
     },
   ];
 

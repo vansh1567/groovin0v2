@@ -4,34 +4,42 @@ import {
   Search, 
   ChevronDown, 
   Edit2, 
-  Trash2 
+  Trash2,
+  FileText
 } from 'lucide-react';
 
 const Properties = () => {
   const propertyData = [
     {
       id: 1,
-      name: "Luxury Villa",
-      email: "contact@luxuryvilla.com",
-      city: "Miami",
-      status: "Active",
-      remarks: "Premium listing"
+      name: "From Factory by Sutra",
+      email: "factorybysutra@gmail.com",
+      city: "Gurugram",
+      status: "Approved",
     },
     {
       id: 2,
-      name: "Downtown Apartment",
-      email: "info@downtown.com",
-      city: "New York",
+      name: "The Red Lion",
+      email: "deeps@yopmail.com",
+      city: "Gurugram",
       status: "Pending",
-      remarks: "Under review"
+
     },
     {
       id: 3,
-      name: "Beach House",
-      email: "beach@property.com",
-      city: "Los Angeles",
-      status: "Inactive",
-      remarks: "Seasonal rental"
+      name: "The Millenium Centre",
+      email: "dummy123@gmail.com",
+      city: "	Gurugram",
+      status: "Pending",
+   
+    },
+    {
+      id: 4,
+      name: "Downtown Sector 29",
+      email: "downtown29@yopmail.com	",
+      city: "	Gurugram",
+      status: "Approved",
+   
     },
   ];
 
@@ -107,7 +115,10 @@ const Properties = () => {
                       {property.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{property.remarks}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 flex items-center gap-2">
+                    <FileText className="h-4 w-4 text-gray-500" />
+                    <span>{property.remarks}</span>
+                  </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     <div className="flex gap-3">
                       <button className="text-blue-600 hover:text-blue-800">
@@ -123,6 +134,7 @@ const Properties = () => {
             </tbody>
           </table>
         </div>
+        
       </div>
     </div>
   );
