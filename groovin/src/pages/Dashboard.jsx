@@ -1,4 +1,5 @@
 import React from 'react';
+import 'animate.css';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { 
   Users, Store, MessageSquare, CheckSquare, 
@@ -25,10 +26,10 @@ const Dashboard = () => {
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       {/* Main Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate__animated animate__fadeInLeft">
         
         {/* Users Card */}
-        <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+        <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow ">
           <div className="flex items-center gap-4">
             <div className="p-4 bg-blue-100 rounded-full">
               <Users className="w-6 h-6 text-blue-600" />

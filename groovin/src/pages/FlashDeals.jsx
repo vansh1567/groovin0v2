@@ -38,7 +38,7 @@ const FlashDeals = () => {
   ];
 
   return (
-    <div className="p-6 max-w-[1400px] mx-auto">
+    <div className="p-6 max-w-[1400px] mx-auto animate__animated animate__fadeInLeft">
       {/* Header and Filters Section */}
       <div className="mb-8">
         <div className="flex justify-between items-center mb-6">

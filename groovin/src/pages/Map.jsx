@@ -91,13 +91,13 @@ const Map = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 w-full py-8">
-      <div className="container mx-auto px-4 max-w-6xl space-y-6">
-      <h1 className="text-2xl font-bold text-gray-800">Map</h1>
+    <div className="min-h-screen bg-gray-50 w-full py-8 ">
+      <div className="container mx-auto px-4 max-w-6xl space-y-6 ">
+      <h1 className="text-2xl font-bold text-gray-800 animate__animated animate__fadeInLeft">Map</h1>
         {/* Header and Search Section */}
-        <div className="bg-white shadow-md rounded-lg p-6">
+        <div className="bg-white shadow-md rounded-lg p-6 animate__animated animate__fadeInLeft">
           {/* Search Input */}
-          <div className="flex flex-col md:flex-row gap-3">
+          <div className="flex flex-col md:flex-row gap-3 animate__animated animate__fadeInLeft">
             <input 
               type="text"
               placeholder="Search for a location (city, address, landmark)"
@@ -109,7 +109,7 @@ const Map = () => {
             <button 
               onClick={handleLocationSearch} 
               disabled={isLoading}
-              className="w-full md:w-auto px-4 py-2 bg-blue-600 text-white rounded-md flex items-center justify-center hover:bg-yellow-700 transition-colors disabled:opacity-50"
+              className="w-full md:w-auto px-4 py-2 bg-blue-600 text-white rounded-md flex items-center justify-center hover:bg-yellow-700 transition-colors disabled:opacity-50 animate__animated animate__fadeInLeft"
             >
               {isLoading ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -122,14 +122,14 @@ const Map = () => {
 
           {/* Error Handling */}
           {error && (
-            <div className="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md">
+            <div className="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-md animate__animated animate__fadeInLeft">
               {error}
             </div>
           )}
         </div>
 
         {/* Google Map */}
-        <div className="w-full h-[500px] rounded-lg overflow-hidden shadow-lg">
+        <div className="w-full h-[500px] rounded-lg overflow-hidden shadow-lg animate__animated animate__fadeInLeft">
           {location ? (
             <LoadScript googleMapsApiKey={GOOGLE_MAPS_API_KEY}>
               <GoogleMap
@@ -162,7 +162,7 @@ const Map = () => {
 
         {/* Location Details */}
         {locationDetails && (
-          <div className="bg-white shadow-md rounded-lg p-6 space-y-4">
+          <div className="bg-white shadow-md rounded-lg p-6 space-y-4 animate__animated animate__fadeInLeft">
             <h2 className="text-xl font-semibold text-gray-800 border-b pb-3">
               Location Details
             </h2>

@@ -10,7 +10,7 @@ const Menu = () => {
   ];
 
   return (
-    <div className="relative w-64">
+    <div className="relative w-64 animate__animated animate__fadeInLeft">
       <select 
         value={selectedLocation}
         onChange={(e) => setSelectedLocation(e.target.value)}

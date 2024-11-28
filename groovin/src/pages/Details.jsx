@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 const Details = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -19,10 +20,13 @@ const Details = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50 ">
+    <div className="flex min-h-screen bg-gray-50 animate__animated animate__fadeInLeft">
       {/* Main Content */}
       <main className="flex-1 p-12">
-        <h2 className="text-xl font-semibold text-gray-700 mb-2">Details</h2>
+        <h2 className="text-xl font-semibold text-gray-700 mb-2"
+         initial={{ opacity: 0, x: -100 }}
+         animate={{ opacity: 1, x: 0 }}
+         transition={{ type: "spring", stiffness: 70, duration: 0.6 }}>Details</h2>
         <h1 className="text-3xl font-bold mb-6">Provide Your Details</h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Name */}

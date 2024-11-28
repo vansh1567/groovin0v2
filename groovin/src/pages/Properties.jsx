@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from "framer-motion";
 import { 
   Filter, 
   Search, 
@@ -42,10 +43,12 @@ const Properties = () => {
   ];
 
   return (
-    <div className="p-6 max-w-[1400px] mx-auto">
+    <div className="p-6 max-w-[1400px] mx-auto animate__animated animate__fadeInLeft">
       {/* Header and Filters Section */}
       <div className="mb-8">
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center mb-6" initial={{ x: "-100vw" }}
+          animate={{ x: 0 }}
+          transition={{ type: "spring", stiffness: 50 }}>
           <h1 className="text-2xl font-semibold text-gray-900">Properties</h1>
           <div className="flex items-center gap-4">
             <button className="flex items-center gap-2 px-4 py-2 text-blue-600 
