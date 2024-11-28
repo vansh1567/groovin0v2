@@ -83,7 +83,7 @@ const Details = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="bg-yellow-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-yellow-600"
+            className="bg-blue-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-yellow-600"
           >
             Submit
           </button>

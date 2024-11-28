@@ -109,7 +109,7 @@ const Map = () => {
             <button 
               onClick={handleLocationSearch} 
               disabled={isLoading}
-              className="w-full md:w-auto px-4 py-2 bg-blue-600 text-white rounded-md flex items-center justify-center hover:bg-blue-700 transition-colors disabled:opacity-50"
+              className="w-full md:w-auto px-4 py-2 bg-blue-600 text-white rounded-md flex items-center justify-center hover:bg-yellow-700 transition-colors disabled:opacity-50"
             >
               {isLoading ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
