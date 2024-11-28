@@ -1,125 +1,128 @@
-import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import {
-  LayoutDashboard,
-  Users,
-  UserCog,
-  Building2,
-  Zap,
-  MessageCircle,
-  Menu as MenuIcon,
-  ChevronLeft,
-  ChevronRight,
-  LogOut,
-  PartyPopper,
-  X
-} from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
-  const [expanded, setExpanded] = useState(true);
-  const [activeItem, setActiveItem] = useState('Dashboard');
-  const [openSubmenu, setOpenSubmenu] = useState(null);
-  const [showLogoutDialog, setShowLogoutDialog] = useState(false);
-  const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   const menuItems = [
-    { title: "Properties", icon: <Building2 className="h-5 w-5" />, path: "/properties" },
-    { title: "Dashboard", icon: <LayoutDashboard className="h-5 w-5" />, path: "/dashboard" },
-    { title: "Administrator", icon: <Users className="h-5 w-5" />, path: "/administrator" },
-    { title: "Assign Role", icon: <UserCog className="h-5 w-5" />, path: "/admin-role" },
-    { title: "Assign Manager", icon: <Users className="h-5 w-5" />, path: "/admin-manager" },
-    { title: "Party and Events", icon: <PartyPopper className="h-5 w-5" />, path: "/party-events" },
-    { title: "Deal", icon: <Building2 className="h-5 w-5" />, path: "/deal" },
-    { title: "Flash Deals", icon: <Zap className="h-5 w-5" />, path: "/flash-deals" },
-    { title: "Enquiry", icon: <MessageCircle className="h-5 w-5" />, path: "/enquiry" },
-    { title: "Menu Management", icon: <MenuIcon className="h-5 w-5" />, path: "/menu-management" },
+    { title: "Properties", path: "/properties" },
+    { title: "Dashboard", path: "/dashboard" },
+    { title: "Administrator", path: "/administrator" },
+    { title: "Assign Role", path: "/admin-role" },
+    { title: "Assign Manager", path: "/admin-manager" },
+    { title: "Party and Events", path: "/party-events" },
+    { title: "Deal", path: "/deal" },
+    { title: "Flash Deals", path: "/flash-deals" },
+    { title: "Enquiry", path: "/enquiry" },
+    { title: "Map", path: "/map" }, 
+    { title: "Details", path: "/details" }, 
+    { title: "Menu Management", path: "/menu-management" },
     
   ];
 
-  const handleLogout = () => {
-    // Add logout logic here
-    console.log('Logging out...');
-    setShowLogoutDialog(false);
-    // navigate('/login');
-  };
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      if (mobile) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+    };
+    
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
+  const HamburgerButton = () => (
+    <motion.button
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.3 }}
+      onClick={() => setIsVisible(true)}
+      className="fixed top-4 left-4 z-50 bg-white p-2 rounded-md shadow-md border font-quicksand"
+    >
+      ☰
+    </motion.button>
+  );
+
+  const SidebarContent = () => (
+    <motion.aside
+      initial={{ x: isMobile ? -300 : 0, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: isMobile ? -300 : 0, opacity: 0 }}
+      transition={{
+        type: "spring",
+        stiffness: 300,
+        damping: 30,
+      }}
+      className="h-screen flex flex-col relative border-r shadow-sm fixed top-0 left-0 z-40 w-64 overflow-hidden font-quicksand"
+      style={{ backgroundColor: '#2C2C2C' }}
+    >
+      {isMobile && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          onClick={() => setIsVisible(false)}
+          className="absolute top-4 right-4 z-50 bg-white p-2 rounded-md shadow-md border"
+        >
+          ✕
+        </motion.button>
+      )}
+
+<div className="flex items-center justify-center p-2 mt-8 mb-8">
+  <span className="text-2xl font-bold text-white font-quicksand">Groovin</span>
+</div>
+
+
+      <motion.nav
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
+        className="flex-1 py-2 px-2 space-y-0.5 overflow-y-auto"
+      >
+        {menuItems.map((item) => (
+          <NavLink
+            key={item.title}
+            to={item.path}
+            className={({ isActive }) =>
+              `group relative flex items-center justify-center w-full py-1.5 px-3
+              text-gray-500 transition-all duration-300
+              hover:text-white text-[15px] font-quicksand
+              ${isActive ? "text-yellow-500" : ""}
+              `
+            }
+            onClick={() => {
+              if (isMobile) setIsVisible(false);
+            }}
+          >
+            <div className="flex flex-col items-center w-full">
+              <span className="font-normal relative">
+                {item.title}
+                <span className={`
+                  absolute bottom-0 left-0 w-0 h-0.5 
+                  bg-yellow-500 transition-all duration-300
+                  group-hover:w-full
+                  ${({ isActive }) => isActive ? "w-full" : ""}
+                `} />
+              </span>
+            </div>
+          </NavLink>
+        ))}
+      </motion.nav>
+    </motion.aside>
+  );
 
   return (
     <>
-      <aside className={`h-screen flex flex-col relative bg-white border-r shadow-sm transition-all duration-300 ${
-        expanded ? "w-64" : "w-16"} lg:relative fixed z-20`}>
-        {/* Collapse Button */}
-        <button 
-          onClick={() => setExpanded(curr => !curr)}
-          className="absolute -right-3 top-10 p-1.5 rounded-full bg-white border shadow-md hover:bg-gray-50 transition-all duration-200"
-        >
-          {expanded ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
-        </button>
-
-        {/* Logo Area */}
-        <div className="flex items-center justify-center p-4 ">
-          {expanded ? (
-           <img src="https://imgs.search.brave.com/G1uI9GrtnOZ3nwxfoKluaqzoD12CikdLe1aalSMBNwA/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTE3/OTc4MDg5NS92ZWN0/b3IvcGxhY2Vob2xk/ZXItZmxhdC1zeW1i/b2wtb3ItbG9jYXRp/b24tdmVjdG9yLWlj/b24uanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPXVrWFhMOUZ0/bE5IN3ZiS1UxYnQ4/NWtVYl9yR1VsaldV/dm16LXFyWnBBUkU9" 
-           alt="Logo"
-           className="h-8 w-8 object-contain" 
-           />
-          ) : (
-            <span></span>
-          )}
-        </div>
-
-        {/* Navigation Items */}
-        <nav className="flex-1 py-4 px-2 space-y-1 overflow-y-auto">
-        <div className="flex items-center justify-center p-4  bg-gradient-to-r from-yellow-400 to-yellow-800 bg-clip-text text-transparent">
-          {expanded ? (
-            <span className="text-2xl font-bold">
-              Groovin
-            </span>
-          ) : (
-            <span className="text-2xl font-bold"> G </span>
-          )}
-        </div>  
-          {menuItems.map((item) => (
-            <div key={item.title}>
-              <button
-                onClick={() => {
-                  setActiveItem(item.title);
-                  if (item.submenu) {
-                    setOpenSubmenu(openSubmenu === item.title ? null : item.title);
-                  }
-                  navigate(item.path);
-                }}
-                className={`flex items-center w-full p-3 rounded-lg transition-all duration-200
-                  hover:bg-gray-100 active:bg-gray-200
-                  ${activeItem === item.title ? "bg-blue-50 text-blue-600" : "text-gray-700"}
-                  ${!expanded && "justify-center"}`}
-              >
-                <div className={`flex items-center gap-4 ${!expanded && "justify-center"}`}>
-                  {item.icon}
-                  {expanded && <span className="text-sm font-medium">{item.title}</span>}
-                </div>
-              </button>
-
-              {/* Submenu */}
-              {item.submenu && expanded && openSubmenu === item.title && (
-                <div className="ml-6 mt-1 space-y-1">
-                  {item.submenu.map((subItem) => (
-                    <button
-                      key={subItem.title}
-                      className="flex items-center w-full p-2 text-sm text-gray-600 rounded-md hover:bg-gray-100"
-                    >
-                      {subItem.icon}
-                      <span className="ml-3">{subItem.title}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </nav>
-
-       
-      </aside>
-
+      <AnimatePresence>
+        {isMobile && !isVisible && <HamburgerButton />}
+        {isVisible && <SidebarContent />}
+      </AnimatePresence>
     </>
   );
 };

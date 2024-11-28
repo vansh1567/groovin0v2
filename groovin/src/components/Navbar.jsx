@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Bell, MessageSquare, User, Menu, LogOut, UserCircle } from 'lucide-react';
+import { Bell, MessageSquare, User, LogOut, UserCircle } from 'lucide-react';
 
-const Navbar = ({ onMenuClick }) => {
+const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -17,62 +17,67 @@ const Navbar = ({ onMenuClick }) => {
   }, []);
 
   return (
-    <nav className="h-16 border-b bg-white">
-      {/* Main navbar container with fixed width and position */}
-      <div className="h-full px-4 flex items-center justify-between">
-        {/* Left section with menu button */}
-        <div className="flex items-center">
-          <div
-           
-            className="p-2 "
-          >
-            
+    <nav className="sticky top-0 z-40 w-full bg-white border-b border-gray-200 shadow-sm font-quicksand">
+      <div className="flex items-center justify-between px-4 py-3 lg:px-6">
+        {/* Left Section - Logo */}
+        <div className="flex items-center space-x-4">
+          {/* Logo */}
+          <div className="flex items-center space-x-2">
+            <img 
+              src="https://imgs.search.brave.com/G1uI9GrtnOZ3nwxfoKluaqzoD12CikdLe1aalSMBNwA/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTE3/OTc4MDg5NS92ZWN0/b3IvcGxhY2Vob2xk/ZXItZmxhdC1zeW1i/b2wtb3ItbG9jYXRp/b24tdmVjdG9yLWlj/b24uanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPXVrWFhMOUZ0/bE5IN3ZiS1UxYnQ4/NWtVYl9yR1VsaldV/dm16LXFyWnBBUkU9" 
+              alt="Company Logo" 
+              className="h-10 w-10 rounded-full object-cover"
+            />
           </div>
         </div>
 
-        {/* Right section with fixed position */}
-        <div className="flex items-center space-x-2">
-          {/* Notification button */}
-          <button className="p-2 hover:bg-gray-100 rounded-lg transition duration-200">
-            <Bell className="w-6 h-6" />
+        {/* Right Section - Notifications, Messages, Profile */}
+        <div className="flex items-center space-x-4">
+          {/* Notification Button */}
+          <button className="p-2 hover:bg-gray-100 rounded-md transition-colors">
+            <Bell className="h-5 w-5 text-gray-600" />
           </button>
 
-          {/* Messages button */}
-          <button className="p-2 hover:bg-gray-100 rounded-lg transition duration-200">
-            <MessageSquare className="w-6 h-6" />
+          {/* Messages Button */}
+          <button className="p-2 hover:bg-gray-100 rounded-md transition-colors">
+            <MessageSquare className="h-5 w-5 text-gray-600" />
           </button>
 
-          {/* Profile dropdown */}
+          {/* Profile Dropdown */}
           <div className="relative" ref={dropdownRef}>
-            <button
+            <button 
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 transition duration-200"
+              className="flex items-center space-x-2 p-1 hover:bg-gray-100 rounded-md transition-colors"
             >
-              <User className="w-6 h-6" />
+              <div className="h-9 w-9 bg-gray-200 rounded-full flex items-center justify-center">
+                <User className="h-6 w-6 text-gray-600" />
+              </div>
             </button>
 
-            {/* Dropdown menu */}
+            {/* Dropdown Menu */}
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border divide-y">
-                <button
+              <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-lg py-1">
+                <button 
                   onClick={() => {
                     setIsDropdownOpen(false);
-                    // Add profile action here
+                    // Add profile action
                   }}
-                  className="w-full px-4 py-2 text-left flex items-center space-x-2 hover:bg-gray-50"
+                  className="w-full px-4 py-2 text-left hover:bg-gray-50 flex items-center space-x-2 text-gray-700"
                 >
-                  <UserCircle className="w-5 h-5" />
-                  <span>Profile</span>
+                  <UserCircle className="h-5 w-5 mr-2" />
+                  Profile
                 </button>
-                <button
+                <div className="border-t border-gray-200 my-1"></div>
+                <button 
                   onClick={() => {
                     setIsDropdownOpen(false);
-                    // Add logout action here
+                    // Add logout action
+                    console.log('Logout');
                   }}
-                  className="w-full px-4 py-2 text-left flex items-center space-x-2 hover:bg-gray-50"
+                  className="w-full px-4 py-2 text-left hover:bg-gray-50 flex items-center space-x-2 text-red-600 hover:text-red-700"
                 >
-                  <LogOut className="w-5 h-5" />
-                  <span>Logout</span>
+                  <LogOut className="h-5 w-5 mr-2" />
+                  Logout
                 </button>
               </div>
             )}

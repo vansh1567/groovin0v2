@@ -1,13 +1,4 @@
 import React from 'react';
-import {
-  Filter,
-  Search,
-  ChevronDown,
-  Edit2,
-  Trash2,
-  ChevronLeft,
-  ChevronRight,
-} from 'lucide-react';
 
 const Deals = () => {
   const partyData = [
@@ -35,10 +26,19 @@ const Deals = () => {
       <div className="mb-8">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-semibold text-gray-900">Deals</h1>
-          <button className="flex items-center gap-2 px-4 py-2 bg-white border rounded-lg shadow-sm hover:bg-gray-50">
-            <Filter className="h-4 w-4" />
-            <span>Filter</span>
-          </button>
+          <div className="flex items-center space-x-4">
+            
+            <button className="flex items-center gap-2 px-3 py-2 text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200 focus:outline-none">
+              
+              Create Deals
+            </button>
+            <button className="flex items-center gap-2 px-4 py-2 bg-white border rounded-lg shadow-sm hover:bg-gray-50">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+              </svg>
+              <span>Filter</span>
+            </button>
+          </div>
         </div>
 
         {/* Search and Filter Controls */}
@@ -47,7 +47,9 @@ const Deals = () => {
           <div className="relative">
             <button className="w-full px-4 py-2.5 bg-white border rounded-lg shadow-sm hover:bg-gray-50 text-left flex items-center justify-between">
               <span className="text-gray-700">Property Name</span>
-              <ChevronDown className="h-4 w-4 text-gray-500" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500">
+                <path d="m6 9 6 6 6-6"/>
+              </svg>
             </button>
           </div>
 
@@ -55,7 +57,9 @@ const Deals = () => {
           <div className="relative">
             <button className="w-full px-4 py-2.5 bg-white border rounded-lg shadow-sm hover:bg-gray-50 text-left flex items-center justify-between">
               <span className="text-gray-700">Status</span>
-              <ChevronDown className="h-4 w-4 text-gray-500" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500">
+                <path d="m6 9 6 6 6-6"/>
+              </svg>
             </button>
           </div>
 
@@ -63,14 +67,14 @@ const Deals = () => {
           <div className="relative">
             <input
               type="date"
-              className="w-full px-4 py-2.5 bg-white border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-2.5 bg-white border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-700"
               placeholder="Start Date"
             />
           </div>
           <div className="relative">
             <input
               type="date"
-              className="w-full px-4 py-2.5 bg-white border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-2.5 bg-white border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-700"
               placeholder="End Date"
             />
           </div>
@@ -106,11 +110,18 @@ const Deals = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     <div className="flex gap-3">
-                      <button className="text-blue-600 hover:text-blue-800">
-                        <Edit2 className="h-4 w-4" />
+                      <button className="text-blue-600 hover:text-blue-800 transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                          <path d="m15 5 4 4"/>
+                        </svg>
                       </button>
-                      <button className="text-red-600 hover:text-red-800">
-                        <Trash2 className="h-4 w-4" />
+                      <button className="text-red-600 hover:text-red-800 transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M3 6h18"/>
+                          <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                          <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                        </svg>
                       </button>
                     </div>
                   </td>
@@ -130,12 +141,16 @@ const Deals = () => {
           </div>
           <div className="flex items-center gap-2">
             <button className="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-              <ChevronLeft className="h-4 w-4" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+                <path d="m15 18-6-6 6-6"/>
+              </svg>
               Previous
             </button>
             <button className="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
               Next
-              <ChevronRight className="h-4 w-4" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
             </button>
           </div>
         </div>

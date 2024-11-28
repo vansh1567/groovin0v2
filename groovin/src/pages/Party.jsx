@@ -7,6 +7,7 @@ import {
   Trash2,
   ChevronLeft,
   ChevronRight,
+  Plus
 } from 'lucide-react';
 
 const Party = () => {
@@ -43,10 +44,18 @@ const Party = () => {
       <div className="mb-8">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-semibold text-gray-900">Party</h1>
-          <button className="flex items-center gap-2 px-4 py-2 bg-white border rounded-lg shadow-sm hover:bg-gray-50">
-            <Filter className="h-4 w-4" />
-            <span>Filter</span>
-          </button>
+          <div className="flex items-center gap-4">
+            <button className="flex items-center gap-2 px-4 py-2 text-blue-600 
+                               hover:bg-blue-50 transition-colors duration-300 
+                               focus:outline-none focus:ring-2 focus:ring-blue-200 rounded-lg">
+              {/* <Plus className="h-4 w-4" /> */}
+              <span className="text-sm font-medium">Create Party</span>
+            </button>
+            <button className="flex items-center gap-2 px-4 py-2 bg-white border rounded-lg shadow-sm hover:bg-gray-50">
+              <Filter className="h-4 w-4" />
+              <span>Filter</span>
+            </button>
+          </div>
         </div>
 
         {/* Search and Filter Controls */}

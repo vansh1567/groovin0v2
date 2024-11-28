@@ -5,9 +5,16 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
-    
+    extend: {
+      fontFamily: {
+        'quicksand': ['"Quicksand"', 'Arial', 'sans-serif'],
+      },
+      safelist: [
+        'animate__animated',
+        'animate__fadeIn',
+        // Add other animations you'll use
+      ]
+    }
   },
   plugins: [],
 }
-
