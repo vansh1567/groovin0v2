@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   Filter,
   Search,
@@ -11,11 +11,15 @@ import {
 } from 'lucide-react';
 
 const Party = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [itemsPerPage] = useState(4); // Number of items to show per page
+
   const partyData = [
     {
       id: 1,
       name: 'Regal Plaza',
-      propertyName: '	Downtown Sector 29',
+      propertyName: 'Downtown Sector 29',
       startDate: '26/11/2024',
       endDate: '26/11/2024',
       status: 'Active',
@@ -30,13 +34,73 @@ const Party = () => {
     },
     {
       id: 3,
-      name: 'New year party',
+      name: 'New Year Party',
       propertyName: 'The Red Lion',
       startDate: '31/12/2024',
       endDate: '31/12/2024',
       status: 'Active',
     },
+    {
+      id: 4,
+      name: 'Summer Bash',
+      propertyName: 'Sunrise Apartments',
+      startDate: '15/06/2024',
+      endDate: '15/06/2024',
+      status: 'Active',
+    },
+    {
+      id: 5,
+      name: 'Winter Wonderland',
+      propertyName: 'Green Valley Homes',
+      startDate: '25/12/2024',
+      endDate: '25/12/2024',
+      status: 'Inactive',
+    },
+    {
+      id: 6,
+      name: 'Halloween Spooktacular',
+      propertyName: 'Urban Heights',
+      startDate: '31/10/2024',
+      endDate: '31/10/2024',
+      status: 'Active',
+    },
+    {
+      id: 7,
+      name: 'Spring Fling',
+      propertyName: 'Lakeside Residency',
+      startDate: '20/03/2024',
+      endDate: '20/03/2024',
+      status: 'Inactive',
+    },
+    {
+      id: 8,
+      name: 'Independence Day Celebration',
+      propertyName: 'The Millenium Centre',
+      startDate: '15/08/2024',
+      endDate: '15/08/2024',
+      status: 'Active',
+    }
   ];
+
+  // Filter parties based on search term
+  const filteredParties = useMemo(() => {
+    return partyData.filter(party => 
+      party.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      party.propertyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      party.status.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm, partyData]);
+
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredParties.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Total pages calculation
+  const totalPages = Math.ceil(filteredParties.length / itemsPerPage);
 
   return (
     <div className="p-6 max-w-[1400px] mx-auto animate__animated animate__fadeInLeft">
@@ -48,7 +112,7 @@ const Party = () => {
             <button className="flex items-center gap-2 px-4 py-2 text-blue-600 
                                hover:bg-blue-50 transition-colors duration-300 
                                focus:outline-none focus:ring-2 focus:ring-blue-200 rounded-lg">
-              {/* <Plus className="h-4 w-4" /> */}
+              <Plus className="h-4 w-4" />
               <span className="text-sm font-medium">Create Party</span>
             </button>
             <button className="flex items-center gap-2 px-4 py-2 bg-white border rounded-lg shadow-sm hover:bg-gray-50">
@@ -92,6 +156,23 @@ const Party = () => {
             />
           </div>
         </div>
+
+        {/* Search Input */}
+        <div className="mt-4">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search parties..."
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentPage(1); // Reset to first page when searching
+              }}
+              className="w-full px-4 py-2.5 bg-white border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 pl-10"
+            />
+            <Search className="h-4 w-4 text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2" />
+          </div>
+        </div>
       </div>
 
       {/* Table Section */}
@@ -109,7 +190,7 @@ const Party = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {partyData.map((party) => (
+              {currentItems.map((party) => (
                 <tr key={party.id} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{party.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{party.propertyName}</td>
@@ -137,22 +218,60 @@ const Party = () => {
           </table>
         </div>
 
-        {/* Pagination */}
-        <div className="flex items-center justify-between px-6 py-3 border-t border-gray-200">
-          <div className="flex items-center">
-            <p className="text-sm text-gray-700">
-              Showing <span className="font-medium">1</span> to <span className="font-medium">3</span> of{' '}
-              <span className="font-medium">10</span> results
-            </p>
+        {/* Pagination Section */}
+        <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200">
+          <div className="text-sm text-gray-700">
+            Showing{' '}
+            <span className="font-medium">
+              {indexOfFirstItem + 1}
+            </span>{' '}
+            to{' '}
+            <span className="font-medium">
+              {Math.min(indexOfLastItem, filteredParties.length)}
+            </span>{' '}
+            of{' '}
+            <span className="font-medium">
+              {filteredParties.length}
+            </span>{' '}
+            parties
           </div>
-          <div className="flex items-center gap-2">
-            <button className="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-              <ChevronLeft className="h-4 w-4" />
+          <div className="flex items-center space-x-2">
+            <button 
+              onClick={() => paginate(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={`flex items-center px-3 py-2 border rounded-md text-sm font-medium transition-colors 
+                ${currentPage === 1 
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                  : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-300'}`}
+            >
+              <ChevronLeft className="h-4 w-4 mr-1" />
               Previous
             </button>
-            <button className="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+
+            {/* Page Numbers */}
+            {[...Array(totalPages)].map((_, index) => (
+              <button
+                key={index}
+                onClick={() => paginate(index + 1)}
+                className={`px-3 py-2 border rounded-md text-sm font-medium transition-colors 
+                  ${currentPage === index + 1 
+                    ? 'bg-blue-500 text-white' 
+                    : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-300'}`}
+              >
+                {index + 1}
+              </button>
+            ))}
+
+            <button 
+              onClick={() => paginate(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className={`flex items-center px-3 py-2 border rounded-md text-sm font-medium transition-colors 
+                ${currentPage === totalPages 
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                  : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-300'}`}
+            >
               Next
-              <ChevronRight className="h-4 w-4" />
+              <ChevronRight className="h-4 w-4 ml-1" />
             </button>
           </div>
         </div>

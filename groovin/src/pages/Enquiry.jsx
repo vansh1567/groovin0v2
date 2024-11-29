@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   Filter,
   Search,
@@ -10,6 +10,9 @@ import {
 
 const Enquiry = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [itemsPerPage] = useState(4); // Number of items to show per page
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -32,7 +35,75 @@ const Enquiry = () => {
       status: 'Active',
       quotation: '$5000',
     },
+    {
+      id: 2,
+      name: 'Jane Smith',
+      propertyName: 'Urban Oasis',
+      eventStartDate: '2024-12-15',
+      eventEndDate: '2024-12-16',
+      enquiryDate: '2024-12-01',
+      noOfGuests: 50,
+      tableEnquiry: 'No',
+      status: 'Inactive',
+      quotation: '$3000',
+    },
+    {
+      id: 3,
+      name: 'Mike Johnson',
+      propertyName: 'Sunset Retreat',
+      eventStartDate: '2025-01-20',
+      eventEndDate: '2025-01-21',
+      enquiryDate: '2024-12-25',
+      noOfGuests: 75,
+      tableEnquiry: 'Yes',
+      status: 'Active',
+      quotation: '$4500',
+    },
+    {
+      id: 4,
+      name: 'Emily Brown',
+      propertyName: 'Lakeside Manor',
+      eventStartDate: '2025-02-10',
+      eventEndDate: '2025-02-11',
+      enquiryDate: '2025-01-15',
+      noOfGuests: 200,
+      tableEnquiry: 'Yes',
+      status: 'Active',
+      quotation: '$7000',
+    },
+    {
+      id: 5,
+      name: 'David Wilson',
+      propertyName: 'Mountain View',
+      eventStartDate: '2025-03-05',
+      eventEndDate: '2025-03-06',
+      enquiryDate: '2025-02-01',
+      noOfGuests: 30,
+      tableEnquiry: 'No',
+      status: 'Inactive',
+      quotation: '$2000',
+    }
   ];
+
+  // Filter enquiries based on search term
+  const filteredEnquiries = useMemo(() => {
+    return enquiryData.filter(enquiry => 
+      enquiry.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      enquiry.propertyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      enquiry.status.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm, enquiryData]);
+
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredEnquiries.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Total pages calculation
+  const totalPages = Math.ceil(filteredEnquiries.length / itemsPerPage);
 
   return (
     <div className="p-6 max-w-[1400px] mx-auto animate__animated animate__fadeInLeft">
@@ -52,6 +123,11 @@ const Enquiry = () => {
             <input
               type="text"
               placeholder="Search enquiries..."
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentPage(1); // Reset to first page when searching
+              }}
               className="w-full px-4 py-2.5 bg-white border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
             <Search className="h-4 w-4 text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2 px-2" />
@@ -78,7 +154,7 @@ const Enquiry = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {enquiryData.map((enquiry) => (
+              {currentItems.map((enquiry) => (
                 <tr key={enquiry.id} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{enquiry.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{enquiry.propertyName}</td>
@@ -104,19 +180,60 @@ const Enquiry = () => {
           </table>
         </div>
 
-        {/* Pagination */}
-        <div className="flex items-center justify-between px-6 py-3 border-t border-gray-200">
-          <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">1</span> to <span className="font-medium">1</span> of <span className="font-medium">1</span> results
-          </p>
-          <div className="flex items-center gap-2">
-            <button className="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-              <ChevronLeft className="h-4 w-4" />
+        {/* Pagination Section */}
+        <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200">
+          <div className="text-sm text-gray-700">
+            Showing{' '}
+            <span className="font-medium">
+              {indexOfFirstItem + 1}
+            </span>{' '}
+            to{' '}
+            <span className="font-medium">
+              {Math.min(indexOfLastItem, filteredEnquiries.length)}
+            </span>{' '}
+            of{' '}
+            <span className="font-medium">
+              {filteredEnquiries.length}
+            </span>{' '}
+            enquiries
+          </div>
+          <div className="flex items-center space-x-2">
+            <button 
+              onClick={() => paginate(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={`flex items-center px-3 py-2 border rounded-md text-sm font-medium transition-colors 
+                ${currentPage === 1 
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                  : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-300'}`}
+            >
+              <ChevronLeft className="h-4 w-4 mr-1" />
               Previous
             </button>
-            <button className="inline-flex items-center px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+
+            {/* Page Numbers */}
+            {[...Array(totalPages)].map((_, index) => (
+              <button
+                key={index}
+                onClick={() => paginate(index + 1)}
+                className={`px-3 py-2 border rounded-md text-sm font-medium transition-colors 
+                  ${currentPage === index + 1 
+                    ? 'bg-blue-500 text-white' 
+                    : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-300'}`}
+              >
+                {index + 1}
+              </button>
+            ))}
+
+            <button 
+              onClick={() => paginate(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className={`flex items-center px-3 py-2 border rounded-md text-sm font-medium transition-colors 
+                ${currentPage === totalPages 
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                  : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-300'}`}
+            >
               Next
-              <ChevronRight className="h-4 w-4" />
+              <ChevronRight className="h-4 w-4 ml-1" />
             </button>
           </div>
         </div>
