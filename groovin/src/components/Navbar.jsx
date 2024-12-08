@@ -17,8 +17,9 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="sticky top-0 z-40 w-full bg-white border-b border-gray-200 shadow-sm font-quicksand">
+    <nav className="sticky top-0 z-40 w-full bg-[#2C2C2C] shadow-md font-quicksand">
       <div className="flex items-center justify-between px-4 py-3 lg:px-6">
+        
         {/* Left Section - Logo */}
         <div className="flex items-center space-x-4">
           {/* Logo */}
@@ -34,47 +35,47 @@ const Navbar = () => {
         {/* Right Section - Notifications, Messages, Profile */}
         <div className="flex items-center space-x-4">
           {/* Notification Button */}
-          <button className="p-2 hover:bg-gray-100 rounded-md transition-colors">
-            <Bell className="h-5 w-5 text-gray-600" />
+          <button className="p-2 hover:bg-gray-700 rounded-md transition-colors">
+            <Bell className="h-5 w-5 text-white" />
           </button>
 
           {/* Messages Button */}
-          <button className="p-2 hover:bg-gray-100 rounded-md transition-colors">
-            <MessageSquare className="h-5 w-5 text-gray-600" />
+          <button className="p-2 hover:bg-gray-700 rounded-md transition-colors">
+            <MessageSquare className="h-5 w-5 text-white" />
           </button>
 
           {/* Profile Dropdown */}
           <div className="relative" ref={dropdownRef}>
             <button 
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="flex items-center space-x-2 p-1 hover:bg-gray-100 rounded-md transition-colors"
+              className="flex items-center space-x-2 p-1 hover:bg-gray-700 rounded-md transition-colors"
             >
-              <div className="h-9 w-9 bg-gray-200 rounded-full flex items-center justify-center">
-                <User className="h-6 w-6 text-gray-600" />
+              <div className="h-9 w-9 bg-gray-700 rounded-full flex items-center justify-center">
+                <User className="h-6 w-6 text-white" />
               </div>
             </button>
 
             {/* Dropdown Menu */}
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-lg py-1">
+              <div className="absolute right-0 mt-2 w-56 bg-gray-800 border border-gray-700 rounded-lg shadow-lg py-1">
                 <button 
                   onClick={() => {
                     setIsDropdownOpen(false);
                     // Add profile action
                   }}
-                  className="w-full px-4 py-2 text-left hover:bg-gray-50 flex items-center space-x-2 text-gray-700"
+                  className="w-full px-4 py-2 text-left hover:bg-gray-700 flex items-center space-x-2 text-white"
                 >
                   <UserCircle className="h-5 w-5 mr-2" />
                   Profile
                 </button>
-                <div className="border-t border-gray-200 my-1"></div>
+                <div className="border-t border-gray-700 my-1"></div>
                 <button 
                   onClick={() => {
                     setIsDropdownOpen(false);
                     // Add logout action
                     console.log('Logout');
                   }}
-                  className="w-full px-4 py-2 text-left hover:bg-gray-50 flex items-center space-x-2 text-red-600 hover:text-red-700"
+                  className="w-full px-4 py-2 text-left hover:bg-gray-700 flex items-center space-x-2 text-red-400 hover:text-red-300"
                 >
                   <LogOut className="h-5 w-5 mr-2" />
                   Logout
