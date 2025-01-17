@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Bell, MessageSquare, User, LogOut, UserCircle } from 'lucide-react';
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -61,7 +63,7 @@ const Navbar = () => {
                 <button 
                   onClick={() => {
                     setIsDropdownOpen(false);
-                    // Add profile action
+                    navigate('/profile'); // Navigate to Profile page
                   }}
                   className="w-full px-4 py-2 text-left hover:bg-gray-700 flex items-center space-x-2 text-white"
                 >
@@ -72,8 +74,7 @@ const Navbar = () => {
                 <button 
                   onClick={() => {
                     setIsDropdownOpen(false);
-                    // Add logout action
-                    console.log('Logout');
+                    navigate('/logout'); // Navigate to Logout Page
                   }}
                   className="w-full px-4 py-2 text-left hover:bg-gray-700 flex items-center space-x-2 text-red-400 hover:text-red-300"
                 >

@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react';
-
 import { 
   Filter, 
   Search, 
@@ -13,7 +12,7 @@ import {
 const Administrator = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-  const [itemsPerPage] = useState(4); // Number of items to show per page
+  const [itemsPerPage] = useState(5); // Increased items per page
 
   const adminData = [
     {
@@ -82,7 +81,6 @@ const Administrator = () => {
     }
   ];
 
-  // Filter admins based on search term
   const filteredAdmins = useMemo(() => {
     return adminData.filter(admin => 
       admin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -91,44 +89,39 @@ const Administrator = () => {
     );
   }, [searchTerm, adminData]);
 
-  // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredAdmins.slice(indexOfFirstItem, indexOfLastItem);
-
-  // Change page
+  const totalPages = Math.ceil(filteredAdmins.length / itemsPerPage);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // Total pages calculation
-  const totalPages = Math.ceil(filteredAdmins.length / itemsPerPage);
-
   return (
-    <div className="p-6 max-w-[1400px] mx-auto animate__animated animate__fadeInLeft">
+    <div className="p-8 max-w-[1600px] mx-auto animate__animated animate__fadeInLeft"> {/* Increased max-width and padding */}
       {/* Header and Filters Section */}
-      <div className="mb-8">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-semibold text-gray-900">Super Admin</h1>
-          <button className="flex items-center gap-2 px-4 py-2 bg-white border rounded-lg shadow-sm hover:bg-gray-50">
-            <Filter className="h-4 w-4" />
-            <span>Filter</span>
+      <div className="mb-10"> {/* Increased margin */}
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-semibold text-gray-900">Super Admin</h1> {/* Increased text size */}
+          <button className="flex items-center gap-2 px-6 py-3 bg-white border rounded-lg shadow-sm hover:bg-gray-50">
+            <Filter className="h-5 w-5" /> {/* Increased icon size */}
+            <span className="text-base">Filter</span> {/* Increased text size */}
           </button>
         </div>
 
         {/* Search and Filter Controls */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6"> {/* Increased gap */}
           {/* Status Dropdown */}
           <div className="relative">
-            <button className="w-full px-4 py-2.5 bg-white border rounded-lg shadow-sm hover:bg-gray-50 text-left flex items-center justify-between">
-              <span className="text-gray-700">Status</span>
-              <ChevronDown className="h-4 w-4 text-gray-500" />
+            <button className="w-full px-6 py-4 bg-white border rounded-lg shadow-sm hover:bg-gray-50 text-left flex items-center justify-between">
+              <span className="text-base text-gray-700">Status</span> {/* Increased text size */}
+              <ChevronDown className="h-5 w-5 text-gray-500" /> {/* Increased icon size */}
             </button>
           </div>
 
           {/* City Dropdown */}
           <div className="relative">
-            <button className="w-full px-4 py-2.5 bg-white border rounded-lg shadow-sm hover:bg-gray-50 text-left flex items-center justify-between">
-              <span className="text-gray-700">City</span>
-              <ChevronDown className="h-4 w-4 text-gray-500" />
+            <button className="w-full px-6 py-4 bg-white border rounded-lg shadow-sm hover:bg-gray-50 text-left flex items-center justify-between">
+              <span className="text-base text-gray-700">City</span> {/* Increased text size */}
+              <ChevronDown className="h-5 w-5 text-gray-500" /> {/* Increased icon size */}
             </button>
           </div>
 
@@ -141,52 +134,52 @@ const Administrator = () => {
                 value={searchTerm}
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
-                  setCurrentPage(1); // Reset to first page when searching
+                  setCurrentPage(1);
                 }}
-                className="w-full px-4 py-2.5 bg-white border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 pl-10"
+                className="w-full px-6 py-4 bg-white border rounded-lg shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 pl-12"
               />
-              <Search className="h-4 w-4 text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2" />
+              <Search className="h-5 w-5 text-gray-500 absolute left-4 top-1/2 transform -translate-y-1/2" />
             </div>
           </div>
         </div>
       </div>
 
       {/* Table Section */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">City</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created Date</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                <th className="px-8 py-4 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                <th className="px-8 py-4 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                <th className="px-8 py-4 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">City</th>
+                <th className="px-8 py-4 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Created Date</th>
+                <th className="px-8 py-4 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                <th className="px-8 py-4 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Action</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {currentItems.map((admin) => (
                 <tr key={admin.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{admin.name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{admin.email}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{admin.city}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{admin.createdDate}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                  <td className="px-8 py-6 whitespace-nowrap text-base font-medium text-gray-900">{admin.name}</td>
+                  <td className="px-8 py-6 whitespace-nowrap text-base text-gray-500">{admin.email}</td>
+                  <td className="px-8 py-6 whitespace-nowrap text-base text-gray-500">{admin.city}</td>
+                  <td className="px-8 py-6 whitespace-nowrap text-base text-gray-500">{admin.createdDate}</td>
+                  <td className="px-8 py-6 whitespace-nowrap">
+                    <span className={`px-4 py-1 inline-flex text-sm leading-6 font-semibold rounded-full 
                       ${admin.status === 'Approved' ? 'bg-green-100 text-green-800' : 
                         admin.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' : 
                         'bg-gray-100 text-gray-800'}`}>
                       {admin.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <div className="flex gap-3">
+                  <td className="px-8 py-6 whitespace-nowrap text-base text-gray-500">
+                    <div className="flex gap-4">
                       <button className="text-blue-600 hover:text-blue-800">
-                        <Edit2 className="h-4 w-4" />
+                        <Edit2 className="h-5 w-5" />
                       </button>
                       <button className="text-red-600 hover:text-red-800">
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-5 w-5" />
                       </button>
                     </div>
                   </td>
@@ -197,8 +190,8 @@ const Administrator = () => {
         </div>
 
         {/* Pagination Section */}
-        <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200">
-          <div className="text-sm text-gray-700">
+        <div className="flex items-center justify-between px-8 py-6 border-t border-gray-200">
+          <div className="text-base text-gray-700">
             Showing{' '}
             <span className="font-medium">
               {indexOfFirstItem + 1}
@@ -213,16 +206,16 @@ const Administrator = () => {
             </span>{' '}
             administrators
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-3">
             <button 
               onClick={() => paginate(currentPage - 1)}
               disabled={currentPage === 1}
-              className={`flex items-center px-3 py-2 border rounded-md text-sm font-medium transition-colors 
+              className={`flex items-center px-4 py-2 border rounded-md text-base font-medium transition-colors 
                 ${currentPage === 1 
                   ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
                   : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-300'}`}
             >
-              <ChevronLeft className="h-4 w-4 mr-1" />
+              <ChevronLeft className="h-5 w-5 mr-1" />
               Previous
             </button>
 
@@ -231,7 +224,7 @@ const Administrator = () => {
               <button
                 key={index}
                 onClick={() => paginate(index + 1)}
-                className={`px-3 py-2 border rounded-md text-sm font-medium transition-colors 
+                className={`px-4 py-2 border rounded-md text-base font-medium transition-colors 
                   ${currentPage === index + 1 
                     ? 'bg-blue-500 text-white' 
                     : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-300'}`}
@@ -243,13 +236,13 @@ const Administrator = () => {
             <button 
               onClick={() => paginate(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className={`flex items-center px-3 py-2 border rounded-md text-sm font-medium transition-colors 
+              className={`flex items-center px-4 py-2 border rounded-md text-base font-medium transition-colors 
                 ${currentPage === totalPages 
                   ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
                   : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-300'}`}
             >
               Next
-              <ChevronRight className="h-4 w-4 ml-1" />
+              <ChevronRight className="h-5 w-5 ml-1" />
             </button>
           </div>
         </div>

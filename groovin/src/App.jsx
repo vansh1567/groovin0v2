@@ -14,6 +14,9 @@ import Enquiry from './pages/Enquiry';
 import Menu from './pages/Menu';
 import Map from './pages/Map'; // Import new Map page
 import Details from './pages/Details'; // Import new Details page
+import Profile from './pages/Profile'; // Update the path as needed
+import Logout from './pages/Logout';
+// import UserProfile from './pages/Test';
 
 const App = () => {
   return (
@@ -33,6 +36,10 @@ const App = () => {
           <Route path="menu-management" element={<Menu />} />
           <Route path="map" element={<Map />} /> {/* Add Map Route */}
           <Route path="details" element={<Details />} /> {/* Add Details Route */}
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/logout" element={<Logout />} />
+          {/* <Route path="/testing" element={<UserProfile />} /> */}
+
         </Route>
       </Routes>
     </Router>

@@ -12,7 +12,7 @@ const Enquiry = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-  const [itemsPerPage] = useState(4); // Number of items to show per page
+  const [itemsPerPage] = useState(8); // Increased items per page to 8
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -106,13 +106,13 @@ const Enquiry = () => {
   const totalPages = Math.ceil(filteredEnquiries.length / itemsPerPage);
 
   return (
-    <div className="p-6 max-w-[1400px] mx-auto animate__animated animate__fadeInLeft">
+    <div className="p-6 max-w-[1600px] mx-auto animate__animated animate__fadeInLeft">
       {/* Header and Filters Section */}
       <div className="mb-8">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-semibold text-gray-900">Enquiries</h1>
+          <h1 className="text-3xl font-semibold text-gray-900">Enquiries</h1> {/* Increased header text size */}
           <button className="flex items-center gap-2 px-4 py-2 bg-white border rounded-lg shadow-sm hover:bg-gray-50">
-            <Filter className="h-4 w-4" />
+            <Filter className="h-5 w-5" /> {/* Increased icon size */}
             <span>Filter</span>
           </button>
         </div>
@@ -130,7 +130,7 @@ const Enquiry = () => {
               }}
               className="w-full px-4 py-2.5 bg-white border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
-            <Search className="h-4 w-4 text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2 px-2" />
+            <Search className="h-5 w-5 text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2 px-2" /> {/* Increased icon size */}
           </div>
         </div>
       </div>
@@ -141,37 +141,37 @@ const Enquiry = () => {
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Property Name</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Event Start Date</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Event End Date</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enquiry Date</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No of Guest</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Table Enquiry</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quotation</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                <th className="px-8 py-5 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Name</th> {/* Increased padding and font size */}
+                <th className="px-8 py-5 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Property Name</th> {/* Increased padding and font size */}
+                <th className="px-8 py-5 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Event Start Date</th> {/* Increased padding and font size */}
+                <th className="px-8 py-5 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Event End Date</th> {/* Increased padding and font size */}
+                <th className="px-8 py-5 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Enquiry Date</th> {/* Increased padding and font size */}
+                <th className="px-8 py-5 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">No of Guest</th> {/* Increased padding and font size */}
+                <th className="px-8 py-5 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Table Enquiry</th> {/* Increased padding and font size */}
+                <th className="px-8 py-5 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Status</th> {/* Increased padding and font size */}
+                <th className="px-8 py-5 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Quotation</th> {/* Increased padding and font size */}
+                <th className="px-8 py-5 text-left text-sm font-medium text-gray-500 uppercase tracking-wider">Action</th> {/* Increased padding and font size */}
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {currentItems.map((enquiry) => (
                 <tr key={enquiry.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{enquiry.name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{enquiry.propertyName}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{enquiry.eventStartDate}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{enquiry.eventEndDate}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{enquiry.enquiryDate}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{enquiry.noOfGuests}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{enquiry.tableEnquiry}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-8 py-5 whitespace-nowrap text-sm font-medium text-gray-900">{enquiry.name}</td> {/* Increased padding and font size */}
+                  <td className="px-8 py-5 whitespace-nowrap text-sm text-gray-500">{enquiry.propertyName}</td> {/* Increased padding and font size */}
+                  <td className="px-8 py-5 whitespace-nowrap text-sm text-gray-500">{enquiry.eventStartDate}</td> {/* Increased padding and font size */}
+                  <td className="px-8 py-5 whitespace-nowrap text-sm text-gray-500">{enquiry.eventEndDate}</td> {/* Increased padding and font size */}
+                  <td className="px-8 py-5 whitespace-nowrap text-sm text-gray-500">{enquiry.enquiryDate}</td> {/* Increased padding and font size */}
+                  <td className="px-8 py-5 whitespace-nowrap text-sm text-gray-500">{enquiry.noOfGuests}</td> {/* Increased padding and font size */}
+                  <td className="px-8 py-5 whitespace-nowrap text-sm text-gray-500">{enquiry.tableEnquiry}</td> {/* Increased padding and font size */}
+                  <td className="px-8 py-5 whitespace-nowrap">
                     <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${enquiry.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}`}>
                       {enquiry.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{enquiry.quotation}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-8 py-5 whitespace-nowrap text-sm text-gray-500">{enquiry.quotation}</td> {/* Increased padding and font size */}
+                  <td className="px-8 py-5 whitespace-nowrap text-sm text-gray-500">
                     <button onClick={handleOpenModal} className="text-blue-600 hover:text-blue-800">
-                      <Eye className="h-5 w-5" />
+                      <Eye className="h-5 w-5" /> {/* Increased icon size */}
                     </button>
                   </td>
                 </tr>
@@ -181,7 +181,7 @@ const Enquiry = () => {
         </div>
 
         {/* Pagination Section */}
-        <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200">
+        <div className="flex items-center justify-between px-8 py-4 border-t border-gray-200">
           <div className="text-sm text-gray-700">
             Showing{' '}
             <span className="font-medium">
@@ -206,7 +206,7 @@ const Enquiry = () => {
                   ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
                   : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-300'}`}
             >
-              <ChevronLeft className="h-4 w-4 mr-1" />
+              <ChevronLeft className="h-5 w-5 mr-1" />
               Previous
             </button>
 
@@ -233,7 +233,7 @@ const Enquiry = () => {
                   : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-300'}`}
             >
               Next
-              <ChevronRight className="h-4 w-4 ml-1" />
+              <ChevronRight className="h-5 w-5 ml-1" />
             </button>
           </div>
         </div>
